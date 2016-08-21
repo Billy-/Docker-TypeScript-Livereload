@@ -1,0 +1,12 @@
+version: '2'
+services:
+  app:
+    extends:
+      file: common.yml
+      service: app
+    depends_on:
+      - centos-node
+  centos-node:
+    extends:
+      file: common.yml
+      service: centos-node

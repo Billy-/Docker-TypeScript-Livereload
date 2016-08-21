@@ -1,0 +1,16 @@
+version: '2'
+services:
+  build:
+    build: .
+    image: ts-build
+    volumes:
+      - ../src:/app/src
+      - ../dist:/app/dist
+    command: npm run watch
+    depends_on:
+      - centos-node
+  centos-node:
+    build:
+      context: ../images
+      dockerfile: centos-node
+    image: centos-node

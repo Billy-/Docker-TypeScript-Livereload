@@ -1,0 +1,25 @@
+FROM centos:7
+MAINTAINER Billy Mathews
+
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh
+
+#RUN groupadd -r defaultgroup && useradd -r -g defaultgroup defaultuser
+#RUN mkdir /home/defaultuser
+#RUN touch /home/defaultuser/.bashrc
+#RUN chown defaultuser:defaultgroup /home/defaultuser
+#RUN chmod -R ug+wrx /home/defaultuser
+#RUN mkdir /app
+#RUN chown defaultuser:defaultgroup /app
+#RUN chmod -R ug+wrx /app
+
+#USER defaultuser
+
+ENV NVM_DIR /root/.nvm
+ENV NODE_VERSION 6.2.2
+
+RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.1/install.sh | bash \
+	&& source $NVM_DIR/nvm.sh \
+	&& nvm install $NODE_VERSION
+
+ENV NODE_PATH $NVM_DIR/versions/node/v$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
